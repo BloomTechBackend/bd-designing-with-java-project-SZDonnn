@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ShipmentOptionTest {
 
-    private Packaging packaging = new Packaging(Material.CORRUGATE, BigDecimal.ONE, BigDecimal.ONE, BigDecimal.ONE);
+    private Packaging packaging = new Box(Material.CORRUGATE, BigDecimal.ONE, BigDecimal.ONE, BigDecimal.ONE);
     private Item item = Item.builder()
         .withAsin("asin")
         .withDescription("description")
@@ -22,7 +22,6 @@ class ShipmentOptionTest {
         .withItem(item)
         .withFulfillmentCenter(fulfillmentCenter)
         .build();
-
     private Item otherItem = Item.builder()
         .withAsin("otherAsin")
         .withDescription("otherDescription")
@@ -31,7 +30,7 @@ class ShipmentOptionTest {
         .withHeight(BigDecimal.TEN)
         .build();
     private FulfillmentCenter otherFulfillmentCenter = new FulfillmentCenter("otherFcCode");
-    private Packaging otherPackaging = new Packaging(Material.CORRUGATE, BigDecimal.TEN, BigDecimal.TEN, BigDecimal.TEN);
+    private Packaging otherPackaging = new Box(Material.LAMINATED_PLASTIC, BigDecimal.TEN, BigDecimal.TEN, BigDecimal.TEN);
 
     @Test
     public void equals_sameObject_returnsTrue() {
@@ -174,14 +173,15 @@ class ShipmentOptionTest {
         int shipmentOptionHashCode = shipmentOption.hashCode();
         Object other = ShipmentOption.builder()
             .withPackaging(otherPackaging)
-            .withFulfillmentCenter(fulfillmentCenter)
             .withItem(item)
+            .withFulfillmentCenter(fulfillmentCenter)
             .build();
 
         // WHEN
         int otherHashCode = other.hashCode();
 
         // THEN
-        assertNotEquals(shipmentOptionHashCode, otherHashCode, "Different packaging should have different hashCodes");
+        assertNotEquals(shipmentOptionHashCode, otherHashCode,
+                "Different packaging should have different hashCodes");
     }
 }

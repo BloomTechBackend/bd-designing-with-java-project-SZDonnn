@@ -3,29 +3,20 @@ package com.amazon.ata.types;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-/**
- * Represents a packaging option.
- *
- * This packaging supports standard boxes, having a length, width, and height.
- * Items can fit in the packaging so long as their dimensions are all smaller than
- * the packaging's dimensions.
- */
-public class Packaging {
+public class PolyBag extends Packaging {
     /**
-     * The material this packaging is made of.
+     * This packaging's largest volume.
      */
-    private Material material;
+    private BigDecimal volume;
 
     /**
      * Instantiates a new Packaging object.
+     *
      * @param material - the Material of the package
      */
-    public Packaging(Material material) {
-        this.material = material;
-    }
-
-    public Material getMaterial() {
-        return material;
+    public PolyBag(Material material, BigDecimal length, BigDecimal width, BigDecimal height) {
+        super(material);
+        this.volume = length.multiply(width).multiply(height);
     }
 
     /**
@@ -34,16 +25,20 @@ public class Packaging {
      * @param item the item to test fit for
      * @return whether the item will fit in this packaging
      */
+    @Override
     public boolean canFitItem(Item item) {
-        throw new UnsupportedOperationException("This method is not supported!");
+        BigDecimal itemVolume = item.getLength().multiply(item.getWidth()).multiply(item.getHeight());
+        return itemVolume.doubleValue() < this.volume.doubleValue();
     }
 
     /**
      * Returns the mass of the packaging in grams. The packaging weighs 1 gram per square centimeter.
      * @return the mass of the packaging
      */
+    @Override
     public BigDecimal getMass() {
-        throw new UnsupportedOperationException("This method is not supported!");
+        double mass = Math.ceil(Math.sqrt(volume.doubleValue()) * 0.6);
+        return BigDecimal.valueOf(mass);
     }
 
     @Override
@@ -71,4 +66,5 @@ public class Packaging {
     public int hashCode() {
         return Objects.hash(getMaterial());
     }
+
 }
