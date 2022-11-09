@@ -70,7 +70,7 @@ class PackagingDAOTest {
         packagingDAO = new PackagingDAO(datastore);
 
         // WHEN
-        List<ShipmentOption> shipmentOptions = packagingDAO.findShipmentOptions(testItem, abe2);
+        List<ShipmentOption> shipmentOptions = packagingDAO.findShipmentOptions(smallItem, abe2);
 
         // THEN
         assertEquals(1, shipmentOptions.size(),
@@ -84,7 +84,7 @@ class PackagingDAOTest {
         packagingDAO = new PackagingDAO(datastore);
 
         // WHEN
-        List<ShipmentOption> shipmentOptions = packagingDAO.findShipmentOptions(smallItem, abe2);
+        List<ShipmentOption> shipmentOptions = packagingDAO.findShipmentOptions(smallItem, iad2);
 
         // THEN
         assertEquals(2, shipmentOptions.size(),

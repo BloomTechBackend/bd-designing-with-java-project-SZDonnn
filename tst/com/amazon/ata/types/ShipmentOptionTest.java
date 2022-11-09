@@ -30,7 +30,7 @@ class ShipmentOptionTest {
         .withHeight(BigDecimal.TEN)
         .build();
     private FulfillmentCenter otherFulfillmentCenter = new FulfillmentCenter("otherFcCode");
-    private Packaging otherPackaging = new Box(Material.LAMINATED_PLASTIC, BigDecimal.TEN, BigDecimal.TEN, BigDecimal.TEN);
+    private Packaging otherPackaging = new PolyBag(Material.LAMINATED_PLASTIC, BigDecimal.TEN);
 
     @Test
     public void equals_sameObject_returnsTrue() {
