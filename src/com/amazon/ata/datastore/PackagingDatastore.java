@@ -28,8 +28,22 @@ public class PackagingDatastore {
             createFcPackagingOptionBox("PDX1", Material.CORRUGATE, "40", "40", "40"),
             createFcPackagingOptionBox("PDX1", Material.CORRUGATE, "60", "60", "60"),
             createFcPackagingOptionBox("PDX1", Material.CORRUGATE, "60", "60", "60"),
+            // MT4
             createFcPackagingOptionPolyBag("IAD2", Material.LAMINATED_PLASTIC, "2000"),
-            createFcPackagingOptionPolyBag("IAD2", Material.LAMINATED_PLASTIC, "10000")
+            createFcPackagingOptionPolyBag("IAD2", Material.LAMINATED_PLASTIC, "10000"),
+            // MT5
+            createFcPackagingOptionPolyBag("IAD2", Material.LAMINATED_PLASTIC, "5000"),
+            createFcPackagingOptionPolyBag("YOW4", Material.LAMINATED_PLASTIC, "2000"),
+            createFcPackagingOptionPolyBag("YOW4", Material.LAMINATED_PLASTIC, "5000"),
+            createFcPackagingOptionPolyBag("YOW4", Material.LAMINATED_PLASTIC, "10000"),
+            createFcPackagingOptionPolyBag("IND1", Material.LAMINATED_PLASTIC, "2000"),
+            createFcPackagingOptionPolyBag("IND1", Material.LAMINATED_PLASTIC, "5000"),
+            createFcPackagingOptionPolyBag("ABE2", Material.LAMINATED_PLASTIC, "2000"),
+            createFcPackagingOptionPolyBag("ABE2", Material.LAMINATED_PLASTIC, "6000"),
+            createFcPackagingOptionPolyBag("PDX1", Material.LAMINATED_PLASTIC, "5000"),
+            createFcPackagingOptionPolyBag("PDX1", Material.LAMINATED_PLASTIC, "10000"),
+            createFcPackagingOptionPolyBag("YOW4", Material.LAMINATED_PLASTIC, "5000")
+
     );
 
     /**

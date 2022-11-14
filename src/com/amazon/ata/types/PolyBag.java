@@ -19,6 +19,10 @@ public class PolyBag extends Packaging {
         this.volume = volume;
     }
 
+    public BigDecimal getVolume() {
+        return volume;
+    }
+
     /**
      * Returns whether the given item will fit in this packaging.
      *
