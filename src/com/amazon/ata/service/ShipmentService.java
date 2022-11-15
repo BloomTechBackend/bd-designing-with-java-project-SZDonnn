@@ -50,21 +50,30 @@ public class ShipmentService {
             List<ShipmentOption> results = this.packagingDAO.findShipmentOptions(item, fulfillmentCenter);
             return getLowestCostShipmentOption(results);
         } catch (RuntimeException | UnknownFulfillmentCenterException | NoPackagingFitsItemException e) {
-            throw new RuntimeException("ShipmentOptions must not be null.");
+            e.printStackTrace();
         }
+        return null;
     }
 
     private ShipmentOption getLowestCostShipmentOption(List<ShipmentOption> results) {
-        List<ShipmentCost> shipmentCosts = applyCostStrategy(results);
-        Collections.sort(shipmentCosts);
-        return shipmentCosts.get(0).getShipmentOption();
+        try {
+            List<ShipmentCost> shipmentCosts = applyCostStrategy(results);
+            Collections.sort(shipmentCosts);
+            return shipmentCosts.get(0).getShipmentOption();
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private List<ShipmentCost> applyCostStrategy(List<ShipmentOption> results) {
-        List<ShipmentCost> shipmentCosts = new ArrayList<>();
-        for (ShipmentOption option : results) {
-            shipmentCosts.add(costStrategy.getCost(option));
+        try {
+            List<ShipmentCost> shipmentCosts = new ArrayList<>();
+            for (ShipmentOption option : results) {
+                shipmentCosts.add(costStrategy.getCost(option));
+            }
+            return shipmentCosts;
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
         }
-        return shipmentCosts;
     }
 }
