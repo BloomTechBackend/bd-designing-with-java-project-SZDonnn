@@ -22,8 +22,10 @@ public class Box extends Packaging {
 
     /**
      * Instantiates a new Packaging object.
-     *
-     * @param material - the Material of the package
+     * @param material - material for package
+     * @param length - length of package
+     * @param width - width of package
+     * @param height - height of package
      */
     public Box(Material material, BigDecimal length, BigDecimal width, BigDecimal height) {
         super(material);

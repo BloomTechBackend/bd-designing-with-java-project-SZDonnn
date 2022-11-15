@@ -13,6 +13,7 @@ public class PolyBag extends Packaging {
      * Instantiates a new Packaging object.
      *
      * @param material - the Material of the package
+     * @param volume - volume of package
      */
     public PolyBag(Material material, BigDecimal volume) {
         super(material);

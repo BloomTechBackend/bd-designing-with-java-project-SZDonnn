@@ -11,12 +11,21 @@ public class PrepareShipmentResponse {
     private Packaging packaging;
     private FulfillmentCenter fulfillmentCenter;
 
+    /**
+     * Setter Constructor for PrepareShipmentResponse.
+     */
     public PrepareShipmentResponse() {
         this.item              = null;
         this.packaging         = null;
         this.fulfillmentCenter = null;
     }
 
+    /**
+     * Setter Constructor for PrepareShipmentResponse.
+     * @param item - item for PrepareShipmentResponse
+     * @param packaging - used for packing item
+     * @param fulfillmentCenter - fulfillment of PrepareShipmentResponse
+     */
     public PrepareShipmentResponse(Item item, Packaging packaging, FulfillmentCenter fulfillmentCenter) {
         this.item = item;
         this.packaging = packaging;
@@ -56,8 +65,8 @@ public class PrepareShipmentResponse {
             return false;
         }
         PrepareShipmentResponse that = (PrepareShipmentResponse) o;
-        return getItem().equals(that.getItem()) && getPackaging().equals(that.getPackaging())
-                                                && getFulfillmentCenter().equals(that.getFulfillmentCenter());
+        return getItem().equals(that.getItem()) && getPackaging().equals(that.getPackaging()) &&
+                getFulfillmentCenter().equals(that.getFulfillmentCenter());
     }
 
     @Override

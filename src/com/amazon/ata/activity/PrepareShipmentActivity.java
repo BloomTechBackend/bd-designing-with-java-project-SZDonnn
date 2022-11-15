@@ -17,8 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * This is implementation of the PrepareShipment activity. It handles PrepareShipment requests by returning
  * the appropriate shipment option.
  */
-public class PrepareShipmentActivity
-                      implements RequestHandler<PrepareShipmentRequest, String> {
+public class PrepareShipmentActivity implements RequestHandler<PrepareShipmentRequest, String> {
     /**
      * Shipment service used to retrieve shipment options.
      */
@@ -29,24 +28,26 @@ public class PrepareShipmentActivity
      *      Provided because AWS Lambda needs one defined evenif it does nothing
      */
     public PrepareShipmentActivity() {}
+
     /**
      * Instantiates a new PrepareShipmentActivity object.
      * @param shipmentService Shipment service used to retrieve shipment options.
      */
-     public PrepareShipmentActivity(ShipmentService shipmentService) {
-         this.shipmentService = shipmentService;
-     }
+    public PrepareShipmentActivity(ShipmentService shipmentService) {
+        this.shipmentService = shipmentService;
+    }
 
     /**
      * This method handles the incoming request by calling the shipment service and returning the
      * appropriate shipment option for the fulfillment center and item provided in the request.
      *
      * @param request contains information on fulfillment center and item
+     * @param context contains context of the request
      * @return String that contains item and packaging information in JSON format
      * @throws Exception if the request can't be fulfilled
      */
     @Override
-        public String handleRequest(PrepareShipmentRequest request, Context context) {
+    public String handleRequest(PrepareShipmentRequest request, Context context) {
 
         Item item = Item.builder()
                 .withAsin(request.getAsin())
