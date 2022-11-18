@@ -1,31 +1,27 @@
 package com.amazon.ata.service;
 
+import com.amazon.ata.cost.CostStrategy;
 import com.amazon.ata.cost.MonetaryCostStrategy;
 import com.amazon.ata.dao.PackagingDAO;
 import com.amazon.ata.datastore.PackagingDatastore;
-import com.amazon.ata.exceptions.NoPackagingFitsItemException;
-import com.amazon.ata.exceptions.UnknownFulfillmentCenterException;
-import com.amazon.ata.types.FulfillmentCenter;
-import com.amazon.ata.types.Item;
-import com.amazon.ata.types.Packaging;
-import com.amazon.ata.types.ShipmentOption;
+import com.amazon.ata.types.*;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ShipmentServiceTest {
-    private FulfillmentCenter ind1 = new FulfillmentCenter("IND1");
-    private PackagingDatastore datastore = new PackagingDatastore();
-    private PackagingDAO packagingDAO;
+    private FulfillmentCenter existentFC = new FulfillmentCenter("ABE2");
+    private FulfillmentCenter nonExistentFC = new FulfillmentCenter("NonExistentFC");
     private Item smallItem = Item.builder()
             .withHeight(BigDecimal.valueOf(1))
             .withWidth(BigDecimal.valueOf(1))
             .withLength(BigDecimal.valueOf(1))
             .withAsin("abcde")
             .build();
-
     private Item largeItem = Item.builder()
             .withHeight(BigDecimal.valueOf(1000))
             .withWidth(BigDecimal.valueOf(1000))
@@ -33,16 +29,18 @@ class ShipmentServiceTest {
             .withAsin("12345")
             .build();
 
-    private FulfillmentCenter existentFC = new FulfillmentCenter("ABE2");
-    private FulfillmentCenter nonExistentFC = new FulfillmentCenter("NonExistentFC");
+    @Mock
+    private PackagingDAO packagingDAO;
+    private CostStrategy costStrategy = new MonetaryCostStrategy();;
+    @InjectMocks
+    private ShipmentService shipmentService = new ShipmentService(new PackagingDAO(new PackagingDatastore()), costStrategy);;
 
-    private ShipmentService shipmentService = new ShipmentService(new PackagingDAO(new PackagingDatastore()),
-            new MonetaryCostStrategy());
 
     @Test
     void findBestShipmentOption_existentFCAndItemCanFit_returnsShipmentOption() {
         // GIVEN & WHEN
         ShipmentOption shipmentOption = shipmentService.findShipmentOption(smallItem, existentFC);
+
 
         // THEN
         assertNotNull(shipmentOption);
